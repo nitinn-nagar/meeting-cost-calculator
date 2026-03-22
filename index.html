@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title>Free Meeting Cost Calculator | Calculate True Cost of Meetings</title>
+    <meta name="description" content="Calculate the real cost of your meetings instantly. See how much your company spends on meetings per week, month, and year. Free tool, no signup required.">
+    <meta name="keywords" content="meeting cost calculator, meeting ROI, calculate meeting cost, meeting expense calculator, how much do meetings cost">
+    <meta name="author" content="Meeting Cost Calculator">
+    
+    <!-- Canonical URL - UPDATE THIS with your actual domain -->
+    <link rel="canonical" href="https://meetingcost.pages.dev/">
+    
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Free Meeting Cost Calculator">
+    <meta property="og:description" content="Calculate the real cost of your meetings. See weekly, monthly, and yearly expenses instantly.">
+    <meta property="og:url" content="https://meetingcost.pages.dev/">
+    <meta property="og:site_name" content="Meeting Cost Calculator">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Meeting Cost Calculator">
+    <meta name="twitter:description" content="Calculate the real cost of your meetings instantly.">
+    
+    <!-- Favicon - Simple SVG -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Meeting Cost Calculator",
+        "description": "Free online tool to calculate the true cost of business meetings including salaries and company overhead",
+        "url": "https://meetingcost.pages.dev/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Calculate meeting costs instantly",
+            "Include company overhead costs",
+            "View weekly, monthly, yearly expenses",
+            "Share results with team",
+            "No signup required"
+        ]
+    }
+    </script>
+    
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How do you calculate meeting cost?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Meeting cost is calculated by multiplying each attendee's hourly rate by the meeting duration. We also add a 1.4x overhead multiplier to account for benefits, taxes, and office costs that companies pay beyond base salary."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the overhead multiplier?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The overhead multiplier (typically 1.3x to 1.5x) accounts for additional costs beyond salary including health insurance, retirement contributions, payroll taxes, office space, equipment, and software. We use 1.4x as a reasonable average."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why should I calculate meeting costs?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Understanding meeting costs helps organizations make better decisions about when meetings are necessary, who needs to attend, and how long they should be. Many companies find they can save thousands of dollars annually by reducing unnecessary meetings."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How accurate is this calculator?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "This calculator provides a reasonable estimate based on average salaries and standard overhead multipliers. Actual costs may vary based on your specific location, industry, and company benefits package."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is this tool free to use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, this meeting cost calculator is completely free to use. No signup, no email required. Your data stays in your browser and is never sent to any server."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Google AdSense - Replace with your code after approval -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+    
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">💰 Meeting Cost Calculator</a>
+            <nav class="nav">
+                <a href="/about.html">About</a>
+                <a href="/privacy.html">Privacy</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1>Free Meeting Cost Calculator</h1>
+                <p class="hero-subtitle">Calculate the true cost of your meetings. See how much your company spends on meetings per week, month, and year.</p>
+            </section>
+
+            <!-- Calculator Section -->
+            <section class="calculator-section">
+                <div class="calculator-card">
+                    <form id="calculator-form" class="calculator-form">
+                        
+                        <!-- Attendees -->
+                        <div class="form-group">
+                            <label for="attendees">
+                                <span class="label-icon">👥</span>
+                                Number of Attendees
+                            </label>
+                            <input 
+                                type="number" 
+                                id="attendees" 
+                                min="1" 
+                                max="100" 
+                                value="5" 
+                                required
+                            >
+                            <span class="input-hint">How many people attend this meeting?</span>
+                        </div>
+
+                        <!-- Average Salary -->
+                        <div class="form-group">
+                            <label for="salary">
+                                <span class="label-icon">💵</span>
+                                Average Annual Salary (USD)
+                            </label>
+                            <select id="salary" required>
+                                <option value="40000">\$40,000 (Entry Level)</option>
+                                <option value="60000">\$60,000 (Mid Level)</option>
+                                <option value="80000" selected>\$80,000 (Senior Level)</option>
+                                <option value="100000">\$100,000 (Lead/Manager)</option>
+                                <option value="120000">\$120,000 (Senior Manager)</option>
+                                <option value="150000">\$150,000 (Director)</option>
+                                <option value="200000">\$200,000 (VP/Executive)</option>
+                                <option value="custom">Custom Amount...</option>
+                            </select>
+                            <input 
+                                type="number" 
+                                id="custom-salary" 
+                                min="20000" 
+                                max="1000000" 
+                                placeholder="Enter custom salary"
+                                class="hidden"
+                            >
+                        </div>
+
+                        <!-- Meeting Duration -->
+                        <div class="form-group">
+                            <label for="duration">
+                                <span class="label-icon">⏱️</span>
+                                Meeting Duration
+                            </label>
+                            <select id="duration" required>
+                                <option value="15">15 minutes</option>
+                                <option value="30">30 minutes</option>
+                                <option value="45">45 minutes</option>
+                                <option value="60" selected>1 hour</option>
+                                <option value="90">1.5 hours</option>
+                                <option value="120">2 hours</option>
+                                <option value="180">3 hours</option>
+                                <option value="240">4 hours</option>
+                            </select>
+                        </div>
+
+                        <!-- Meeting Frequency -->
+                        <div class="form-group">
+                            <label for="frequency">
+                                <span class="label-icon">🔄</span>
+                                Meeting Frequency
+                            </label>
+                            <select id="frequency" required>
+                                <option value="once">One-time meeting</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly" selected>Weekly</option>
+                                <option value="biweekly">Every 2 weeks</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+
+                        <!-- Include Overhead Toggle -->
+                        <div class="form-group form-group-toggle">
+                            <label for="overhead">
+                                <span class="label-icon">🏢</span>
+                                Include Company Overhead (1.4x)
+                            </label>
+                            <label class="toggle">
+                                <input type="checkbox" id="overhead" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="input-hint">Includes benefits, taxes, office costs beyond base salary</span>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-card" id="results">
+                    <h2>Meeting Cost Breakdown</h2>
+                    
+                    <div class="result-primary">
+                        <span class="result-label">Cost Per Meeting</span>
+                        <span class="result-value" id="cost-per-meeting">\$0</span>
+                    </div>
+
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <span class="result-label">Weekly Cost</span>
+                            <span class="result-value" id="cost-weekly">\$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Monthly Cost</span>
+                            <span class="result-value" id="cost-monthly">\$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Yearly Cost</span>
+                            <span class="result-value" id="cost-yearly">\$0</span>
+                        </div>
+                    </div>
+
+                    <div class="result-breakdown" id="breakdown">
+                        <h3>💡 What This Could Buy Instead</h3>
+                        <ul id="comparison-list">
+                            <!-- Populated by JavaScript -->
+                        </ul>
+                    </div>
+
+                    <div class="share-section">
+                        <button type="button" class="btn btn-share" id="share-btn">
+                            📤 Share This Result
+                        </button>
+                        <button type="button" class="btn btn-copy" id="copy-btn">
+                            📋 Copy to Clipboard
+                        </button>
+                    </div>
+
+                    <p class="share-hint" id="share-message"></p>
+                </div>
+            </section>
+
+            <!-- Ad Placement 1 - After Calculator -->
+            <div class="ad-container">
+                <!-- AdSense Ad Unit - Replace after approval -->
+                <!-- <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                     data-ad-slot="XXXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->
+                <div class="ad-placeholder">Advertisement</div>
+            </div>
+
+            <!-- How to Use Section -->
+            <section class="content-section">
+                <h2>How to Use This Meeting Cost Calculator</h2>
+                <ol class="steps-list">
+                    <li>
+                        <strong>Enter the number of attendees</strong> — Include everyone who regularly joins the meeting, from required participants to optional attendees.
+                    </li>
+                    <li>
+                        <strong>Select the average salary level</strong> — Choose the closest match to your team's average compensation. When in doubt, use the "Senior Level" default.
+                    </li>
+                    <li>
+                        <strong>Choose the meeting duration</strong> — Select how long the meeting typically runs. Be honest — most meetings run longer than scheduled!
+                    </li>
+                    <li>
+                        <strong>Set the meeting frequency</strong> — Is this a one-time meeting or does it recur? Weekly recurring meetings add up quickly.
+                    </li>
+                    <li>
+                        <strong>Review your results</strong> — See the instant cost breakdown and share with your team to spark conversations about meeting efficiency.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- Why Calculate Meeting Costs Section -->
+            <section class="content-section">
+                <h2>Why Calculate the Cost of Meetings?</h2>
+                <p>
+                    Meetings are one of the largest hidden costs in any organization. According to research from Harvard Business Review, executives spend an average of <strong>23 hours per week</strong> in meetings, up from less than 10 hours in the 1960s. For many companies, unproductive meetings cost millions of dollars annually in lost productivity.
+                </p>
+                <p>
+                    By calculating the true cost of your meetings, you can:
+                </p>
+                <ul class="benefits-list">
+                    <li>✅ Make data-driven decisions about which meetings are necessary</li>
+                    <li>✅ Justify reducing meeting frequency to leadership</li>
+                    <li>✅ Encourage shorter, more focused meetings</li>
+                    <li>✅ Identify which attendees truly need to be present</li>
+                    <li>✅ Calculate ROI on meeting optimization initiatives</li>
+                </ul>
+            </section>
+
+            <!-- Ad Placement 2 - Middle of content -->
+            <div class="ad-container">
+                <div class="ad-placeholder">Advertisement</div>
+            </div>
+
+            <!-- Understanding the Numbers Section -->
+            <section class="content-section">
+                <h2>Understanding the Numbers</h2>
+                
+                <h3>The Overhead Multiplier Explained</h3>
+                <p>
+                    An employee's true cost to the company is significantly higher than their base salary. The <strong>overhead multiplier</strong> (we use 1.4x) accounts for:
+                </p>
+                <ul>
+                    <li>Health insurance and benefits (typically 15-25% of salary)</li>
+                    <li>Employer payroll taxes (7.65% for Social Security and Medicare)</li>
+                    <li>Retirement contributions (3-6% for 401k matches)</li>
+                    <li>Office space and utilities</li>
+                    <li>Equipment, software, and IT support</li>
+                    <li>Training and professional development</li>
+                </ul>
+                <p>
+                    While the exact multiplier varies by company, <strong>1.3x to 1.5x is standard</strong> across most industries. Some tech companies with generous benefits may see multipliers as high as 1.6x.
+                </p>
+
+                <h3>How Hourly Rates Are Calculated</h3>
+                <p>
+                    To convert annual salary to hourly rate, we divide by 2,080 (the standard number of working hours per year: 52 weeks × 40 hours). This gives us the base hourly cost before applying the overhead multiplier.
+                </p>
+            </section>
+
+            <!-- Tips Section -->
+            <section class="content-section">
+                <h2>Tips for Reducing Meeting Costs</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <span class="tip-icon">📝</span>
+                        <h3>Always Have an Agenda</h3>
+                        <p>Meetings with clear agendas are 30% shorter on average. Send the agenda in advance so attendees come prepared.</p>
+                    </div>
+                    <div class="tip-card">
+                        <span class="tip-icon">👥</span>
+                        <h3>Limit Attendees</h3>
+                        <p>Apply the "two pizza rule" — if you can't feed the group with two pizzas, there are too many people in the meeting.</p>
+                    </div>
+                    <div class="tip-card">
+                        <span class="tip-icon">⏰</span>
+                        <h3>Default to 25 or 50 Minutes</h3>
+                        <p>Instead of 30 or 60 minute meetings, schedule 25 or 50 minutes. This creates buffer time and reduces overruns.</p>
+                    </div>
+                    <div class="tip-card">
+                        <span class="tip-icon">📧</span>
+                        <h3>Try Async First</h3>
+                        <p>Before scheduling a meeting, ask: "Could this be an email or Slack message?" Many meetings are unnecessary information sharing.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="content-section faq-section">
+                <h2>Frequently Asked Questions</h2>
+                
+                <details class="faq-item">
+                    <summary>How do you calculate meeting cost?</summary>
+                    <p>Meeting cost is calculated by multiplying each attendee's hourly rate by the meeting duration. We also add a 1.4x overhead multiplier to account for benefits, taxes, and office costs that companies pay beyond base salary. The formula is: (Number of Attendees × Hourly Rate × Duration in Hours × Overhead Multiplier).</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What is the overhead multiplier?</summary>
+                    <p>The overhead multiplier (typically 1.3x to 1.5x) accounts for additional costs beyond salary including health insurance, retirement contributions, payroll taxes, office space, equipment, and software. We use 1.4x as a reasonable average for most organizations.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why should I calculate meeting costs?</summary>
+                    <p>Understanding meeting costs helps organizations make better decisions about when meetings are necessary, who needs to attend, and how long they should be. Many companies find they can save thousands of dollars annually by reducing unnecessary meetings or making existing meetings more efficient.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How accurate is this calculator?</summary>
+                    <p>This calculator provides a reasonable estimate based on average salaries and standard overhead multipliers. Actual costs may vary based on your specific location, industry, and company benefits package. For precise calculations, use your company's actual salary data and overhead rates.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Is this tool free to use?</summary>
+                    <p>Yes, this meeting cost calculator is completely free to use. No signup required, no email collection. All calculations happen in your browser — your data is never sent to any server, ensuring complete privacy.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can I share my results with my team?</summary>
+                    <p>Yes! Click the "Share This Result" button to copy a shareable summary to your clipboard. You can paste this into Slack, email, or any other communication tool to start conversations about meeting efficiency with your team.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What's the average cost of a meeting?</summary>
+                    <p>Research suggests the average meeting costs between \$300 and \$500 per hour when you factor in all attendees' time and overhead. A typical one-hour meeting with 5 senior employees can easily cost \$400-600. Weekly recurring meetings can exceed \$20,000-30,000 per year.</p>
+                </details>
+            </section>
+
+            <!-- Ad Placement 3 - After FAQ -->
+            <div class="ad-container">
+                <div class="ad-placeholder">Advertisement</div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">💰 Meeting Cost Calculator</span>
+                    <p>Free tool to calculate the true cost of business meetings.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/about.html">About</a>
+                    <a href="/privacy.html">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Meeting Cost Calculator. All rights reserved.</p>
+                <p>Made with ❤️ to help teams work more efficiently.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
